@@ -34,18 +34,17 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textColorHint="@color/white"
-                android:background="@drawable/edittext_background"
+
                 android:id="@+id/email_reg"
                 android:layout_margin="10dp">
             </EditText>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="15dp"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:textColorHint="@color/white"
-                android:background="@drawable/edittext_background"
                 android:id="@+id/password_reg"
                 android:layout_margin="10dp">
             </EditText>
