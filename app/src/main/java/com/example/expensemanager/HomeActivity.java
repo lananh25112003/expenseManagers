@@ -2,7 +2,7 @@ package com.example.expensemanager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -70,8 +71,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             // Xử lý khi chọn income
         } else if (itemId == R.id.expense) {
             // Xử lý khi chọn expense
-        } else {
-            // Xử lý trường hợp không khớp
         }
         if (fragment != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
