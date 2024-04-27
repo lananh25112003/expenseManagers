@@ -18,6 +18,9 @@ import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private BottomNavigationView bottomNavigationView;
+    private FrameLayout frameLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +30,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle("Expense Manager");
         setSupportActionBar(toolbar);
 
+        bottomNavigationView = findViewById(R.id.bottomNavigationbar);
+        frameLayout = findViewById(R.id.main_frame);
+
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
+        // Tạo toggle để điều khiển DrawerLayout và ActionBar
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close
+                this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close
         );
 
         drawerLayout.addDrawerListener(toggle);
@@ -39,32 +46,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-
-//        // Ẩn thanh tiêu đề
-//        getSupportActionBar().hide();
-//
-//        // Hiển thị thanh thời gian và pin nhỏ
-//        View decorView = getWindow().getDecorView();
-//        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        
     }
-
+    // onBack dùng khi người dùng nhấn nút Back, nhưng ở đây lỗi thời vì điện thoại này ko có 3 nút dưới.
     @Override
     public void onBackPressed() {
         DrawerLayout drawerLayout =findViewById(R.id.drawer_layout);
 
+        // Đóng DrawerLayout nếu nó đang mở khi nhấn nút Back
         if(drawerLayout.isDrawerOpen(GravityCompat.END)){
             drawerLayout.closeDrawer(GravityCompat.END);
         }else{
             super.onBackPressed();
         }
     }
+
+    // Phương thức này được gọi khi người dùng chọn một mục trong NavigationView
     public void displaySelectedListener(int itemId){
 
         Fragment fragment = null;
 
+        // Kiểm tra xem người dùng đã chọn mục nào và thực hiện xử lý tương ứng
         if (itemId == R.id.dashboard) {
             // Xử lý khi chọn dashboard
         } else if (itemId == R.id.income) {
@@ -72,6 +74,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (itemId == R.id.expense) {
             // Xử lý khi chọn expense
         }
+
+        // Thay thế fragment hiện tại bằng fragment mới (nếu có)
         if (fragment != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.main_frame, fragment);
@@ -85,6 +89,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Gọi phương thức displaySelectedListener() khi người dùng chọn một mục trong NavigationView
         displaySelectedListener(item.getItemId());
         return true;
     }

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
-    android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+    android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
     android:background="@color/nav_header"
     android:orientation="vertical"
     android:layout_height="200dp">

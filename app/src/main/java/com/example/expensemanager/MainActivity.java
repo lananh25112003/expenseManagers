@@ -37,17 +37,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        // câu lệnh if này cho vào thẳng trang home
+        if(mAuth.getCurrentUser()!= null){
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         mDialog = builder.create();
-        // Ẩn thanh tiêu đề
-        getSupportActionBar().hide();
-
-        // Hiển thị thanh thời gian và pin nhỏ
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
         loginDetails();
     }
 

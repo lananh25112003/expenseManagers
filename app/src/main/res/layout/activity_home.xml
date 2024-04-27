@@ -10,20 +10,22 @@
     tools:openDrawer="start"
     tools:context=".HomeActivity">
 
+    <!-- Phần này chứa layout cho thanh tiêu đề và thanh công cụ -->
     <include layout="@layout/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <!-- Phần này chứa NavigationView để hiển thị menu điều hướng -->
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         app:itemTextAppearance="@style/TextAppearance.AppCompat.Small"
         app:itemIconTint="@color/toolbar_color"
         android:layout_gravity="start"
         android:id="@+id/navView"
+        app:itemTextColor="@color/nav_header"
         android:fitsSystemWindows="true"
         app:menu="@menu/navmenu"
         app:headerLayout="@layout/nav_header"
         android:layout_height="match_parent"/>
-
-
 
 </androidx.drawerlayout.widget.DrawerLayout>
