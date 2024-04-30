@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,6 +22,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
 
+    private DashboardFragment dashboardFragment;
+    private IncomeFragment incomeFragment;
+    private ExpenseFragment expenseFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +50,37 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        
+        dashboardFragment = new DashboardFragment();
+        incomeFragment = new IncomeFragment();
+        expenseFragment = new ExpenseFragment();
+
+        setFragment(dashboardFragment);
+
+        bottomNavigationView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.dashboard) {
+                    setFragment(dashboardFragment);
+                    bottomNavigationView.setItemBackgroundResource(R.color.dashboard_color);
+                } else if (itemId == R.id.income) {
+                    setFragment(incomeFragment);
+                    bottomNavigationView.setItemBackgroundResource(R.color.income_color);
+                } else if (itemId == R.id.expense) {
+                    setFragment(expenseFragment);
+                    bottomNavigationView.setItemBackgroundResource(R.color.expense_color);
+                }
+            }
+
+        });
     }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.commit();
+    }
+
     // onBack dùng khi người dùng nhấn nút Back, nhưng ở đây lỗi thời vì điện thoại này ko có 3 nút dưới.
     @Override
     public void onBackPressed() {
@@ -76,11 +109,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         // Thay thế fragment hiện tại bằng fragment mới (nếu có)
-        if (fragment != null){
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.main_frame, fragment);
-            ft.commit();
-        }
+//        if (fragment != null){
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.main_frame, fragment);
+//            ft.commit();
+//        }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
